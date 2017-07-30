@@ -22,6 +22,6 @@ class Definition
   private
 
   def shell_to_dict
-    `dict --formatted --nocorrect --database fd-nld-eng #{ word }`.presence
+    `dict --formatted --nocorrect --database fd-nld-eng "#{ word }"`.presence
   end
 end
