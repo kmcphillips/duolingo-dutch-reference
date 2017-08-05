@@ -28,6 +28,7 @@ module DB
       foreign_key :lesson_id, :lessons
       String :value
       String :definition, text: true
+      String :source
     end
   end
 end

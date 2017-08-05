@@ -6,7 +6,7 @@ class Definition
     @word = word
   end
 
-  delegate :value, :source, to: :factory
+  delegate :value, :source, to: :factory, allow_nil: true
 
   def factory
     return @factory if defined? @factory

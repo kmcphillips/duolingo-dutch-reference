@@ -19,6 +19,7 @@ words.each do |word|
 
   if definition.value
     word.definition = definition.value
+    word.source = definition.source
     word.save
     print "."
   end
