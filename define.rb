@@ -3,10 +3,7 @@ require_relative "base"
 
 puts "Connecting to DB"
 
-DB.connection
-
-require_relative "word"
-require_relative "lesson"
+DB.connect
 
 puts "Adding definitions"
 

@@ -8,6 +8,16 @@ module DB
     @connection ||= Sequel.connect("sqlite://#{ FILENAME }")
   end
 
+  def connect
+    connection
+
+    require_relative "models/definition"
+    require_relative "models/word"
+    require_relative "models/lesson"
+
+    connection
+  end
+
   def reset
     FileUtils.rm(FILENAME)
     FileUtils.touch(FILENAME)

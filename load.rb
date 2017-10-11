@@ -3,10 +3,11 @@ require_relative "base"
 
 puts "Connecting to DB"
 
-DB.reset
+DB.connect
 
-require_relative "word"
-require_relative "lesson"
+puts "Resetting the DB"
+
+DB.reset
 
 puts "Loading source file"
 
