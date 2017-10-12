@@ -6,21 +6,48 @@ class Lookup
     @word = word
   end
 
-  delegate :value, :source, to: :factory, allow_nil: true
+  def all
+    return @all if defined? @all
 
-  def factory
-    return @factory if defined? @factory
+    @all = SOURCES.map do |klass|
+      result = klass.new(@word)
 
-    SOURCES.each do |klass|
-      source = klass.new(@word)
-
-      if source.value
-        @factory = source
-        return @factory
+      if result.value
+        result
+      else
+        nil
       end
+    end.compact
+
+    @all
+  end
+
+  class Glosbe
+    def initialize(word)
+      @word = word
     end
 
-    @factory = nil
+    def value
+      return @value if defined? @value
+
+      response = ::Glosbe::Language.new(from: :nl, to: :en).lookup(@word)
+
+      unless response.success?
+        raise "Response not successful with messages: #{response.messages}"
+      end
+
+      return unless response.found?
+
+      pieces = [ response.translation ]
+      pieces = pieces + response.translated_define.uniq.first(5)
+      pieces = pieces.reject(&:blank?)
+
+      @value = pieces.join("\n").presence
+    end
+
+    def source
+      "Glosbe"
+    end
   end
 
   class Dict
@@ -48,11 +75,12 @@ class Lookup
     private
 
     def shell_to_dict
-      `dict --formatted --nocorrect --database fd-nld-eng "#{ @word }"`.presence
+      `dict --formatted --nocorrect --database fd-nld-eng "#{ @word }" 2> /dev/null`.presence
     end
   end
 
   SOURCES = [
-    Dict
+    Glosbe,
+    Dict,
   ].freeze
 end
