@@ -5,5 +5,6 @@ require "json"
 require "sqlite3"
 require "sequel"
 require "glosbe/translate"
+require "tty-progressbar"
 
 require_relative "db"
