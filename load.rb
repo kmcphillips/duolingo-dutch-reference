@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 require_relative "base"
+require "tty-progressbar"
 
-puts "Creating an empty DB"
+puts "Creating database"
 
 DB.reset
 
@@ -9,7 +10,7 @@ puts "Loading source file"
 
 data = JSON.parse(File.read("dutch.json"))
 
-print "Processing lessons"
+bar = TTY::ProgressBar.new("Creating lessons and words [:bar] :current/:total", total: data.length)
 
 data.each do |lesson_name, values|
   Lesson.insert(name: lesson_name)
@@ -20,8 +21,7 @@ data.each do |lesson_name, values|
     Word.insert(value: value, lesson_id: lesson.id)
   end
 
-  print "."
+  bar.advance(1)
 end
 
-puts ""
-puts "Created #{Lesson.count} lessons"
+puts "Done"

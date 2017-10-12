@@ -10,3 +10,4 @@ gem "json"
 gem "sequel"
 gem "activesupport"
 gem "glosbe-translate"
+gem 'tty-progressbar'
