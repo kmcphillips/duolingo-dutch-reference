@@ -5,7 +5,7 @@ require "erb"
 
 require_relative "base"
 
-DB.connection
+DB.connect
 
 get "/" do
   @lessons = Lesson.all

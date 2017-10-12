@@ -11,7 +11,7 @@ module DB
   def connect
     connection
 
-    require_relative "models/definition"
+    require_relative "models/lookup"
     require_relative "models/word"
     require_relative "models/lesson"
 

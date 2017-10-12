@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Definition
+class Lookup
   attr_reader :word
 
   def initialize(word)

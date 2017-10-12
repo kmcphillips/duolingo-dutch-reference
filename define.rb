@@ -12,11 +12,11 @@ words = Word.where(definition: nil)
 puts "Processing #{ words.count } words"
 
 words.each do |word|
-  definition = Definition.new(word.value)
+  lookup = Lookup.new(word.value)
 
-  if definition.value
-    word.definition = definition.value
-    word.source = definition.source
+  if lookup.value
+    word.definition = lookup.value
+    word.source = lookup.source
     word.save
     print "."
   end
