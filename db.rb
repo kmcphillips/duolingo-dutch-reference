@@ -12,17 +12,21 @@ module DB
     connection
 
     require_relative "models/lookup"
-    require_relative "models/word"
     require_relative "models/lesson"
+    require_relative "models/word"
+    require_relative "models/definition"
 
     connection
   end
 
   def reset
+    @connection = nil
+
     FileUtils.rm(FILENAME)
     FileUtils.touch(FILENAME)
-    @connection = nil
+
     migrate
+    connect
 
     nil
   end
@@ -37,7 +41,13 @@ module DB
       primary_key :id
       foreign_key :lesson_id, :lessons
       String :value
-      String :definition, text: true
+      Integer :learned_count, default: 0
+    end
+
+    connection.create_table(:definitions) do
+      primary_key :id
+      foreign_key :word_id, :words
+      String :value, text: true
       String :source
     end
   end

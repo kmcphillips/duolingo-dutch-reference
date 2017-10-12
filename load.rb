@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 require_relative "base"
 
-puts "Connecting to DB"
-
-DB.connect
-
-puts "Resetting the DB"
+puts "Creating an empty DB"
 
 DB.reset
 
@@ -21,14 +17,11 @@ data.each do |lesson_name, values|
   lesson = Lesson.last
 
   values.each do |value|
-    Word.insert(value: value)
-    word = Word.last
-
-    lesson.add_word(word)
+    Word.insert(value: value, lesson_id: lesson.id)
   end
 
   print "."
 end
 
 puts ""
-puts "Done"
+puts "Created #{Lesson.count} lessons"
