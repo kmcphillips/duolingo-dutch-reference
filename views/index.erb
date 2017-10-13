@@ -5,17 +5,17 @@
 
   <ul>
     <% lesson.words.each do |word| %>
-      <% if word.definition %>
+      <% if word.definitions.any? %>
         <li>
           <strong><%= word.value %></strong>:
-          <% word.definition.split("/n").each do |line| %>
+          <% word.definition_lines.each do |line| %>
             <br>
             <%= line %>
           <% end %>
         </li>
       <% else %>
         <li>
-          <em><%= word.value %></em> not found
+          <strong><%= word.value %></strong>: <em>not found</em>
         </li>
       <% end %>
     <% end %>
