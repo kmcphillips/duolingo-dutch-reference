@@ -8,7 +8,7 @@ GEM
       tzinfo (~> 1.1)
     coderay (1.1.1)
     concurrent-ruby (1.0.4)
-    glosbe-translate (0.0.3)
+    glosbe-translate (0.0.4)
       httparty (~> 0.15)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)

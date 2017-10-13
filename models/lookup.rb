@@ -33,7 +33,7 @@ class Lookup
       response = ::Glosbe::Language.new(from: :nl, to: :en).lookup(@word)
 
       unless response.success?
-        raise "Response not successful with messages: #{response.messages}"
+        raise "Response not successful: #{response.message}"
       end
 
       return unless response.found?
