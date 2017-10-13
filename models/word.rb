@@ -6,7 +6,7 @@ class Word < Sequel::Model
   def definition_lines
     if definitions.any?
       definitions.map do |definition|
-        definition.value.split("/n")
+        definition.value.split("\n")
       end.flatten.compact
     else
       []
