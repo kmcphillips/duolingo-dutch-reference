@@ -5,7 +5,7 @@ puts "Connecting to database"
 
 DB.connect
 
-puts "Adding definitions"
+puts "Retrieving words needing definitions"
 
 words = Word.all.to_a.select{ |w| w.definitions.blank? }
 
