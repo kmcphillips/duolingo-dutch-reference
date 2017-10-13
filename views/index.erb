@@ -1,21 +1,28 @@
 <% @lessons.each do |lesson| %>
-  <h2><%= lesson.name %></h2>
+  <div class="container" id="lesson-<%= lesson.id %>">
+    <h2><%= lesson.name %></h2>
 
-  <ul>
-    <% lesson.words.each do |word| %>
-      <% if word.definitions.any? %>
-        <li>
-          <strong><%= word.value %></strong>:
-          <% word.definition_lines.each do |line| %>
-            <br>
-            <%= line %>
-          <% end %>
-        </li>
-      <% else %>
-        <li>
-          <strong><%= word.value %></strong>: <em>not found</em>
-        </li>
+    <ul>
+      <% lesson.words.each do |word| %>
+        <% if word.definitions.any? %>
+          <li>
+            <a data-toggle="collapse" href="#word-<%= word.id %>">
+              <strong><%= word.value %></strong>
+            </a>
+
+            <div class="collapse" id="word-<%= word.id %>">
+              <% word.definition_lines.each do |line| %>
+                <%= line %>
+                <br>
+              <% end %>
+            </div>
+          </li>
+        <% else %>
+          <li>
+            <strong><%= word.value %></strong>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+  </div>
 <% end %>
