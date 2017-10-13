@@ -1,3 +1,13 @@
+<div class="container">
+  <ol>
+    <% @lessons.each do |lesson| %>
+      <li>
+        <a href="#lesson-<%= lesson.id %>"><%= lesson.name %></a>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
 <% @lessons.each do |lesson| %>
   <div class="container" id="lesson-<%= lesson.id %>">
     <h2><%= lesson.name %></h2>
